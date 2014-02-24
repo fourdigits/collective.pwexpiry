@@ -21,11 +21,11 @@ def send_notification_email(user, days_to_expire, email_view='notification_email
     api.portal.send_email(recipient=recipient,
                           subject=subject,
                           body=MIMEText(body, 'html'))
-    
+
 def days_since_event(event_date, current_date):
     """
     Returns the number of days difference
     between two given dates
     """
-    difference = current_date - event_date
+    difference = current_date.replace(tzinfo=None) - event_date.replace(tzinfo=None)
     return difference.days
