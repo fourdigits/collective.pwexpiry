@@ -61,8 +61,8 @@ class PwExpiryPlugin(BasePlugin):
         user = api.user.get(username=login)
         if not user:
             return None
-        password_date = user.getProperty('password_date', '2000/01/01')
-        if str(password_date) != '2000/01/01':
+        password_date = user.getProperty('password_date', DateTime('2000/01/01'))
+        if password_date.Date() != '2000/01/01':
             current_time = DateTime()
             registry = getUtility(IRegistry)
             validity_period = registry['collective.pwexpiry.validity_period']
