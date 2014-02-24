@@ -82,8 +82,9 @@ class PwExpiryPlugin(BasePlugin):
         """
         user_expired = response.getHeader('user_expired')
         if user_expired:
+            portal = api.portal.get()
             IStatusMessage(request).add(_(u'Your password has expired.'), type='warning')
-            response.redirect('/mail_password_form?userid=%s' % user_expired, lock=1)
+            response.redirect(portal.absolute_url() + '/mail_password_form?userid=%s' % user_expired, lock=1)
             return 1
         return 0
 
